@@ -1,8 +1,6 @@
 # Income-Prediction
 
 
-# Enhancing the Airbnb Performance through Price Prediction and Market Segmentation using Machine Learning
-
 welfare and social inequality in society is still a problem. what causes the factors and solutions must be emerged.
 
 ## Objective
