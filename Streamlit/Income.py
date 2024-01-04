@@ -24,7 +24,7 @@ st.markdown(
 
     Enjoy! Critiques and suggestions are welcome, you can contact me at:
     - 📨 arifmaulana22597@gmail.com
-    - 👷 Let's get connected on [LinkedIn](https://www.linkedin.com/in/arif-maulana22)
+    - 👷 Let's get connected on [LinkedIn](https://www.linkedin.com/in/arif-maulana22/)
     - 💻 https://github.com/arifaulana22
     
 """
