@@ -26,4 +26,6 @@ st.markdown(
     - 📨 arifmaulana22597@gmail.com
     - 👷 Let's get connected on [LinkedIn](https://www.linkedin.com/in/arif-maulana22)
     - 💻 https://github.com/arifaulana22
+    
+"""
 )
