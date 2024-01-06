@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # Load dataset (gunakan dataset income prediction Anda)
-df = pd.read_csv('dataset/data_cleaned.csv')
+df = pd.read_csv('Streamlit/dataset/data_cleaned.csv')
 
 # Sidebar untuk pemilihan visualisasi
 selected_visualization = st.sidebar.selectbox(
