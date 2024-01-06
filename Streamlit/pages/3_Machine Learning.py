@@ -16,7 +16,7 @@ st.title('Income Prediction ML App')
 #        loaded_object = pickle .load(open('./model/xgboostbaru1.pkl', 'rb'))
 #        st.write(f"Loaded Object Type: {type(loaded_object)}")
 #        return loaded_object
-model_load = pickle.load(open('model/xgboostbaru1.pkl', 'rb'))
+model_load = pickle.load(open('Streamlit/model/xgboostbaru1.pkl', 'rb'))
 # # Load model
 # with open('./model/xgboostbaru1.pkl', 'rb') as file:
 #      model_load = pickle.load(file)
