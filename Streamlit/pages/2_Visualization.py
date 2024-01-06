@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load data from data_cleaned.csv
-df = pd.read_csv('dataset/data_cleaned.csv')
+df = pd.read_csv('Streamlit/dataset/data_cleaned.csv')
 
 
 st.title('Income Prediction Boxplot Visualization')
