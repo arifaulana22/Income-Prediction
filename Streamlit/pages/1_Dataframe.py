@@ -1,39 +1,73 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import numpy as np
+import time
 
-# Load dataset (gunakan dataset income prediction Anda)
-df = pd.read_csv('Streamlit/dataset/data_cleaned.csv')
+st.title("📊 Demonstration: Loading Income Prediction Clean Data with Caching")
 
-# Sidebar untuk pemilihan visualisasi
-selected_visualization = st.sidebar.selectbox(
-    'Pilih Visualisasi',
-    ('Histogram', 'Pie Chart')
+st.markdown("""🌐 Source Data Adopted from UCI (https://code.datasciencedojo.com/datasciencedojo/datasets/tree/master/Census%20Income)""")
+
+# Ini buat nambahin cache biar dia ga reload ulang
+@st.cache_data 
+def load_data(nrow):
+
+    ### Simulating Loading a Large Dataset
+    data = pd.read_csv('dataset/data_cleaned.csv', nrows=nrow)
+
+    chunk_1 = data[0:200]
+    chunk_2 = data[200:400]
+    chunk_3 = data[400:600]
+    chunk_4 = data[600:800]
+    chunk_5 = data[800:]
+
+    all_chunk = [chunk_1, chunk_2, chunk_3, chunk_4, chunk_5]
+
+    new_data = pd.DataFrame()
+    counter_text = st.text('Processing...')
+    for i, chunk in enumerate(all_chunk):
+        counter_text.text(f"Processing Part {i+1}/{len(all_chunk)}")
+        time.sleep(0.6)
+        new_data = new_data.append(chunk).reset_index(drop = True)
+    del counter_text
+    return data
+
+data_load_state = st.text('Loading data...')
+data = load_data(1000)
+data_load_state.text('Done!')
+
+# Nilai default checkbox adalah false
+if st.checkbox('Show raw data'):
+    st.subheader('Raw data') # Kalau diklik muncul ini
+    st.write(data)
+
+# Cache Demo
+st.markdown(
+    """
+Now, let's Check 🔄 Ideally, the app shouldn't have to redownload the dataset.
+
+Caching allows us to store the results of a function in Streamlit. So, when the app is refreshed and there are
+no changes to a particular function, the cached results are retrieved, preventing the function from being rerun
+every time the app is refreshed.
+    """
 )
 
-# Fungsi caching untuk menghindari pembacaan berulang dataset
-@st.cache_data
-def load_data():
-    return df
 
-# Visualisasi pertama: Histogram
-if selected_visualization == 'Histogram':
-    st.title('Histogram Age')
-    
-    data = load_data()
-    
-    fig = px.histogram(data, x='age', nbins=20, title='Histogram Age')
-    st.plotly_chart(fig)
+# Penjelasan
+st.markdown("""This is the dataset we will use for visualization and machine learning later
+            🧹The dataset has already been cleaned, as I have completed the:""")
 
-# Visualisasi kedua: Pie Chart
-elif selected_visualization == 'Pie Chart':
-    st.title('Pie Chart Distribusi Kelas Income')
-    
-    data = load_data()
-    
-    income_counts = data['income'].value_counts()
-    labels = income_counts.index
-    values = income_counts.values
-    
-    fig = px.pie(data, names='income', title='Distribusi Kelas Income')
-    st.plotly_chart(fig)
+st.markdown("- Data Cleaning")
+
+st.image('1.png', caption='Database', use_column_width=True)
+
+st.markdown("- Missing Values")
+
+st.image('2.png', caption='Missing Values', use_column_width=True)
+
+st.markdown("- Duplicates Values")
+
+st.image('3.png', caption='Duplicates Values', use_column_width=True)
+
+st.markdown("- Feature Engineering")
+
+st.image('4.png', caption='Feature Enginnering', use_column_width=True)
